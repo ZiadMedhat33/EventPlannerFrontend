@@ -22,39 +22,70 @@ export default function Signup() {
 
   return (
     <>
-      <center>
-      <table className="form-table" width={'100%'}>
-        <tr width={'100%'}>
-          <td width={'50%'} id="form-image"></td>
-          <td width={'50%'}>
-            <div class="form login">
-            <h2 class="form-title text-yellow">Create a new account, and benefit from out service!</h2>
-            <form onSubmit={handleSubmit}>
-                <label class="text-light-gray" for="TB_Email">Email</label>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+    <div className="appointment-container">
+      <div className="left-side">
+        <div className="overlay"></div>
+        <div className="doctor-info">
+          <h1><strong>EventPlanner</strong></h1>
+          <h2>Fast and easy.</h2>
+          <p>Organize your events with us!</p>
+        </div>
+      </div>
 
-                <label class="text-light-gray" for="TB_password">Password</label>
-                <input type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required/>
+      <div className="right-side">
+        <h2 class="form-title text-yellow">Create a new account, and benefit from out service!</h2>
+        <form onSubmit={handleSubmit}>
+            <label class="text-light-gray" for="TB_Email">Email</label>
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
 
-                <button  type="submit" value="login">Create new account</button>
-            </form>
-            <p>
-            Already have an account?{" "}
-            <span onClick={() => navigate("/signup")} style={{ color: "blue", cursor: "pointer" }}>
-                Log in
-            </span>
-            </p>
-            <hr/>
-            <div id="alertBox"></div>
-          </div>
-        </td>
-        </tr>
-      </table>
-      </center>
+            <label class="text-light-gray" for="TB_password">Password</label>
+            <input type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required/>
+
+            <button className="submit-button"  type="submit" value="login">Create new account</button>
+        </form>
+        <p>
+        Already have an account?{" "}
+        <span onClick={() => navigate("/signup")} style={{ color: "blue", cursor: "pointer" }}>
+            Log in
+        </span>
+        </p>
+        <hr/>
+        <div id="alertBox"></div>
+      </div>
+    </div>
+      {/* <div className="bg-image">
+        <img src="/images/istockphoto-2014634732-612x612.jpg"></img>
+      </div>
+      <div class="form login">
+        <h2 class="form-title text-yellow">Create a new account, and benefit from out service!</h2>
+        <form onSubmit={handleSubmit}>
+            <label class="text-light-gray" for="TB_Email">Email</label>
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+
+            <label class="text-light-gray" for="TB_password">Password</label>
+            <input type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required/>
+
+            <button  type="submit" value="login">Create new account</button>
+        </form>
+        <p>
+        Already have an account?{" "}
+        <span onClick={() => navigate("/signup")} style={{ color: "blue", cursor: "pointer" }}>
+            Log in
+        </span>
+        </p>
+        <hr/>
+        <div id="alertBox"></div>
+      </div> */}
+        
+      
     </>
   );
 }
