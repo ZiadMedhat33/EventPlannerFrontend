@@ -20,18 +20,17 @@ export default function Signup() {
         });
         const data = await res.json();
         if (!res.ok) {
-          setMessage(data.error || "Signup failed. Please try again.");
           setMessageType("error");
+          setMessage(data.errors.map(err => err.msg));
           return;
         }
-        setMessage(`Signup successful! ${<span onClick={() => navigate("/login")} style={{ color: "blue", cursor: "pointer" }}>Log in</span>}`);
+        setMessage('Signup successful!');
         setMessageType("success");
         setUsername("");
         setEmail("");
         setPassword("");
       } catch (err) {
-        console.error(err);
-        setMessage("Signup failed. Please try again: ",err);
+        setMessage(`Signup failed. Please try again: ${err}`);
         setMessageType("error");
       }
   };
