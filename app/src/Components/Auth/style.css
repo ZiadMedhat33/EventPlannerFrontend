@@ -77,10 +77,11 @@
   border-radius: 25px;
   background-color: #f0f0f0;
   font-size: 1rem;
+  margin-bottom: 5%;
 }
-.submit-button {
-    display: flex;   
-    width: 50%;
+.submit-button { 
+    width: 100%;
+    margin-bottom: 5%;
     padding: 12px;
     background: #0e8227;
     color: white;
@@ -90,7 +91,6 @@
     cursor: pointer;
     transition: 0.3s ease;
     justify-self: center;
-    text-align: center;
 }
 .submit-button:hover {
     background: #129c30;
