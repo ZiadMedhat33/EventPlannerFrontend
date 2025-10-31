@@ -28,7 +28,8 @@ export default function Login() {
             console.log(accessToken);
             if (accessToken) {
                 const decoded = jwtDecode(accessToken);
-                console.log(decoded.username, decoded.role);
+                console.log(decoded.username, decoded.role)
+                alert(decoded.username + " " + decoded.role);
             }
             setMessage("Login successful!");
             navigate("/");
