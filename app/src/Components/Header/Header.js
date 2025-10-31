@@ -16,7 +16,7 @@ export default function Header() {
         <nav>
             <div className="nav-upper-part">
                 <div className="nav-title">
-                    <div className="burger-icon" onClick={toggleMenu}><i class="fa-solid fa-bars"></i></div>
+                    <div className="burger-icon" onClick={toggleMenu}><i className="fa-solid fa-bars"></i></div>
                     EventPlanner
                 </div>
                 {!loggedIn ?

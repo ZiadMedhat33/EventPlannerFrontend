@@ -1,4 +1,3 @@
-import { getActiveElement } from "@testing-library/user-event/dist/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Signup() {
@@ -14,7 +13,7 @@ export default function Signup() {
       setMessage("");
       setMessageType("");
       try {
-        const res = await fetch("http://localhost:3000/users/signup", {
+        const res = await fetch("http://localhost:3080/users/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, email, password }),
@@ -47,17 +46,16 @@ export default function Signup() {
           <p>Organize your events with us!</p>
         </div>
       </div>
-
       <div className="right-side">
-        <h2 class="form-title text-yellow">Create a new account, and benefit from out service!</h2>
+        <h2 className="form-title text-yellow">Create a new account, and benefit from out service!</h2>
         <form onSubmit={handleSubmit}>
-            <label class="text-light-gray" >Email</label>
+            <label className="text-light-gray" >Email</label>
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
 
-            <label class="text-light-gray" >Username</label>
+            <label className="text-light-gray" >Username</label>
             <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
 
-            <label class="text-light-gray" for="TB_password">Password</label>
+            <label className="text-light-gray" >Password</label>
             <input type="password"
             placeholder="Password"
             value={password}
