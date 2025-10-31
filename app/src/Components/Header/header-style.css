@@ -1,86 +1,199 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
-}     
-body{
-    margin:0;
-    padding:0;
+    box-sizing: border-box;
 }
-nav{
-    background-color:green;
-    color:white;
-    width:100%;
-    min-height:5rem;
-    display:flex;
+
+body {
+    min-height: 100vh;
+    font-family: 'Instrument Sans', sans-serif;
+    margin-top: 5rem;
+
+}
+
+nav {
+    width: 100%;
+    min-height: 5rem;
+    display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
 }
-.nav-upper-part{
-    min-height:5rem;
-    display:flex;
-    justify-content: space-between;
-    padding-right:3rem;
-    padding-left:3rem;
-    align-items: center;
+
+
+.nav-title {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
 }
-@media(max-width:450px){
-    .nav-upper-part{
-        justify-content:center;
-        flex-wrap: wrap;
-        flex-direction: column;
-        align-items:center;
-        padding-right:0rem;
-        padding-left:0rem;
-    }
-}
-.nav-title{
-    font-size:2rem;
-    display:flex;
-    justify-content:center;
-}
-.nav-buttons{
-    display:flex;
-    justify-content:center;
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap:1rem;
+    gap: 1rem;
 }
-    .login-button{
-    width:5em;
-    height:2em;
+
+.login-button {
+    width: 5em;
+    height: 2em;
+    border-radius: 6px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+
 }
-.signup-button{
-    width:5em;
-    height:2em;
+
+.login-button:hover {
+    background-color: black;
+    color: white;
+    transition: 0.3s ease;
+
 }
-.burger-icon{
-    align-self: flex-start;  /* move to left */
-margin-left: 1rem;
-height: 5rem;            /* match nav bar height */
-display: flex;
-align-items: center;     /* center icon vertically */
+
+.signup-button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 5em;
+    height: 2em;
+    border-radius: 6px;
 }
-@media(min-width:450px){
-    .burger-icon{
-        display:none;
-    }
+
+.signup-button:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s ease;
 }
-.nav-lower-part{
-    background-color: aqua;
-    display:flex;
-    justify-content:center;
+
+.burger-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
 }
-.nav-items-contaienr{
+
+
+.nav-lower-part {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-items-contaienr {
     display: flex;
     flex-wrap: wrap;
-    padding-right:2.5rem;
-    padding-left:2.5rem;
-    width:100%;
-    
-} 
-.nav-item{
-    padding:0.5rem;
-    height:2rem;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    width: 100%;
+
 }
-.nav-item:hover{
-    background-color: black;
+
+.nav-item {
+    padding: 0.5rem;
+    min-height: 2rem;
+}
+
+.nav-item:hover {
+    background-color: #082567;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.nav-upper-part {
+    background-color: #082567;
+    color: white;
+}
+
+
+
+@media(min-width:450px) {
+    .burger-icon {
+        display: none;
+    }
+
+    .nav-upper-part {
+        min-height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 3rem;
+        padding-left: 3rem;
+        align-items: center;
+    }
+}
+
+@media(max-width:450px) {
+    nav {
+        box-shadow: unset;
+    }
+
+    .nav-upper-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: auto;
+        padding: 0.5rem;
+        height: 2.5rem;
+    }
+
+    .nav-title {
+        gap: 0.5rem;
+        align-self: flex-start;
+        font-size: 1.25rem;
+
+    }
+
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .signup-button {
+        display: none;
+    }
+
+
+
+    nav-lower-part {
+        position: absolute;
+    }
+
+    .nav-items-contaienr {
+        flex-direction: column;
+        padding-left: 0.1rem;
+    }
+
+    .nav-lower-part {
+        position: absolute;
+        left: -100%;
+        top: 2.5rem;
+        height: 100vh;
+        width: 50%;
+        flex-direction: column;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        padding: 0;
+        justify-content: unset;
+        background-color: #082567;
+    }
+
+    .nav-lower-part.open {
+        left: -2px;
+    }
+
+    .nav-item {
+        width: 100%;
+        white-space: normal;
+        word-break: break-word;
+
+        color: white;
+
+    }
+
+
 }
