@@ -1,33 +1,45 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import './style.css'
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login:", { email, password });
-
-    // fetch("http://localhost:3000/login", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ email, password }),
-    //     })
-    //     .then((res) => res.json())
-    //     .then((data) => console.log(data))
-    //     .catch((err) => console.error(err));
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState("");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("http://localhost:4000/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setMessage(data.error || "Login failed. Please try again.");
+                setMessageType("error");
+                return;
+            }
+            const { accessToken, refreshToken } = data;
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            setMessage("Login successful!");
+            navigate("/");
+        } catch (error) {
+            console.error("Login error:", error);
+            setMessage("Something went wrong. Try again.");
+        }
     };
     return (
         <>
-            <div class="form login">
-                <h2 class="form-title text-yellow">Account Login</h2>
+            <div className="form login">
+                <h2 className="form-title text-yellow">Account Login</h2>
                 <form onSubmit={handleSubmit}>
-                    <label class="text-light-gray" for="TB_Email">Email</label>
+                    <label className="text-light-gray" for="TB_Email">Email</label>
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
 
-                    <label class="text-light-gray" for="TB_password">Password</label>
+                    <label className="text-light-gray" for="TB_password">Password</label>
                     <input type="password"
                     placeholder="Password"
                     value={password}
@@ -43,8 +55,21 @@ export default function Login() {
                 </span>
                 </p>
                 <hr/>
-                <div id="alertBox"></div>
-
+                {message && (
+                <div
+                style={{
+                    marginTop: "20px",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    fontWeight: "bold",
+                    color: messageType === "error" ? "#B00020" : "#0F5132",
+                    backgroundColor: messageType === "error" ? "#F8D7DA" : "#D1E7DD",
+                    border: `1px solid ${messageType === "error" ? "#F5C2C7" : "#BADBCC"}`,
+                }}
+                >
+                {message}
+                </div>
+                )}
             </div>
         </>
     );

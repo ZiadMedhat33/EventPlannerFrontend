@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ export default function Signup() {
       setMessage("");
       setMessageType("");
       try {
-        const res = await fetch("http://localhost:3080/users/register", {
+        const res = await fetch("http://localhost:4000/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, email, password }),
@@ -24,7 +24,7 @@ export default function Signup() {
           setMessageType("error");
           return;
         }
-        setMessage("Signup successful!");
+        setMessage(`Signup successful! ${<span onClick={() => navigate("/login")} style={{ color: "blue", cursor: "pointer" }}>Log in</span>}`);
         setMessageType("success");
         setUsername("");
         setEmail("");
@@ -86,7 +86,6 @@ export default function Signup() {
           {message}
         </div>
         )}
-        <div id="alertBox"></div>
       </div>
     </div>
     </>
