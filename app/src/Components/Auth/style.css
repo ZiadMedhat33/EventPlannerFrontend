@@ -95,3 +95,63 @@
 .submit-button:hover {
     background: #129c30;
 }
+
+.form {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(86, 86, 86, 0.399);
+    width: 30%;
+    min-width: 400px;
+    padding: 5%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 4%;
+    font-family:'Calibri';
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+.text-yellow {
+    color: 	#ffc900
+}
+.text-light-gray {
+    color: 	#b4b4b4
+}
+.form .form-title{
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+.form label {
+    text-align: start;
+}
+.form input {
+    background-color: #eeeeee;
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border 0.3s ease;
+}
+
+.form input:focus {
+    border-color: #f39c12;
+    outline: none;
+}
+.form button {
+    
+    width: 100%;
+    padding: 12px;
+    background: #0e8227;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form button:hover {
+    background: #129c30;
+}

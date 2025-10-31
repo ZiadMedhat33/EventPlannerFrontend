@@ -6,61 +6,32 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
+    useEffect(() => {handleProfile()}, []);
+    const handleProfile= async () => {
+        fetch("http://localhost:4000/user/getUsername", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        })
+        .then((data) => {
+            setUsername(data.username);
+            setLoggedIn(true)
+            console.log(data);
+        })
+        .catch((error) => console.error("Error:", error));
+    };
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
-    useEffect(() => {
-        const checkLoginStatus = async () => {
-        const accessToken = localStorage.getItem("accessToken");
-        if (!accessToken) {
-            setLoggedIn(false);
-            return;
-        }
-        try {
-            let res = await fetch("http://localhost:4000/profile", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${accessToken}`,
-            },
-            credentials: "include",
-            });
-            if (res.status === 403) {
-            const refreshRes = await fetch("http://localhost:4000/refresh", {
-                method: "POST",
-                credentials: "include",
-            });
-            if (!refreshRes.ok) throw new Error("Refresh failed");
-            const data = await refreshRes.json();
-            localStorage.setItem("accessToken", data.accessToken);
-            res = await fetch("http://localhost:4000/profile", {
-                headers: {
-                "Authorization": `Bearer ${data.accessToken}`,
-                },
-            });
-            }
-            const data = await res.json();
-            setUsername(data.username);
-            setLoggedIn(true);
-        } catch (err) {
-            console.error("Error checking login:", err);
-            setLoggedIn(false);
-        }
-        };
-        checkLoginStatus();
-    }, []);
-    const handleLogout = async () => {
-        try {
-        await fetch("http://localhost:4000/auth/logout", {
+    const handleLogout= async () => {
+        let res = await fetch("http://localhost:4000/auth/logout", {
             method: "DELETE",
-            credentials: "include",
+            headers: {
+            "Authorization": `Bearer ${localStorage.getItem("refreshToken")}`,
+            },
         });
-        localStorage.removeItem("accessToken");
-        setLoggedIn(false);
-        setUsername("");
-        } catch (err) {
-        console.error("Logout failed", err);
-        }
     };
     return (
         <nav>
