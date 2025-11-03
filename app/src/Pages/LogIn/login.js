@@ -1,48 +1,30 @@
-import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import './style.css'
+import { login } from "../../Services/auth";
+import { AuthContext } from "../../Context/AuthContext";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
-    const handleSubmit = async (e) => {
+    const {setAccessToken} = useContext(AuthContext)
+    const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch("http://localhost:4000/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-            });
-            const data = await res.json();
-            if (!res.ok) {
-                setMessage(data.error || "Login failed. Please try again.");
-                setMessageType("error");
-                return;
-            }
-            const { accessToken, refreshToken } = data;
-            localStorage.setItem("accessToken", accessToken);
-            localStorage.setItem("refreshToken", refreshToken);
-            console.log(accessToken);
-            if (accessToken) {
-                const decoded = jwtDecode(accessToken);
-                console.log(decoded.username, decoded.role)
-                alert(decoded.username + " " + decoded.role);
-            }
-            setMessage("Login successful!");
+            setAccessToken(await login(email,password));
             navigate("/");
         } catch (error) {
-            console.error("Login error:", error);
-            setMessage("Something went wrong. Try again.");
+            setMessage(error || "Login failed. Please try again.");
+            setMessageType("error");
         }
     };
     return (
         <>
             <div className="form login">
                 <h2 className="form-title text-yellow">Account Login</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleLogin}>
                     <label className="text-light-gray" for="TB_Email">Email</label>
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 

@@ -1,32 +1,43 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import './header-style.css';
-
+import { logout } from '../../Services/auth';
+import { jwtDecode } from 'jwt-decode';
+import { AuthContext } from '../../Context/AuthContext';
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
-
-
+    const { accessToken,setAccessToken } = useContext(AuthContext);
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
     const handleLogout = async () => {
-        let res = await fetch("http://localhost:4000/auth/logout", {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("refreshToken")}`,
-            },
-        });
+        try{
+            setUsername("");
+            logout();  
+            setAccessToken("");
+        }catch(error){
+            console.log(error);
+        }
     };
+    useEffect(() => {
+        if (accessToken) {
+            try {
+                const decoded = jwtDecode(accessToken);
+                setUsername(decoded.username || "");
+            } catch (err) {
+                console.error("Invalid token:", err);
+            }
+        }
+    }, [accessToken]);
     return (
         <nav>
             <div className="nav-upper-part">
                 <div className="nav-title">
-                    <div className="burger-icon" onClick={toggleMenu}><i class="fa-solid fa-bars"></i></div>
+                    <div className="burger-icon" onClick={toggleMenu}><i className="fa-solid fa-bars"></i></div>
                     EventPlanner
                 </div>
-                {!loggedIn ? (
+                {!username ? (
                     <div className="nav-buttons">
                         <Link to="/login">
                             <button className="login-button">Login</button>

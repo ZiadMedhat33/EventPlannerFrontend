@@ -1,15 +1,11 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import Login from "./Components/Auth/login";
-import Signup from "./Components/Auth/signup";
+import Login from "./Pages/LogIn/login";
+import Signup from "./Pages/SignUp/signup";
 import Header from "./Components/Header/Header";
-import Home from "./Components/Home/home";
-import { MyContext } from './Components/Auth/context';
+import Home from "./Pages/Home/home";
 
 
 function App() {
-  const { value } = useContext(MyContext);
-  const navigate = useNavigate();
   return (
     <>
       <Header/>
