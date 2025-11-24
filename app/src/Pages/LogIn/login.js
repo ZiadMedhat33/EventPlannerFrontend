@@ -16,7 +16,7 @@ export default function Login() {
             setAccessToken(await login(email,password));
             navigate("/");
         } catch (error) {
-            setMessage(error || "Login failed. Please try again.");
+            setMessage(error.message || "Login failed. Please try again.");
             setMessageType("error");
         }
     };
