@@ -3,6 +3,7 @@ import Login from "./Pages/LogIn/login";
 import Signup from "./Pages/SignUp/signup";
 import Header from "./Components/Header/Header";
 import Home from "./Pages/Home/home";
+import ProtectedRoute from "./Context/ProtectedRoute";
 
 
 function App() {
@@ -12,8 +13,12 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
       </Routes>
+      <ProtectedRoute>
+        <Routes>
+          <Route path="/" element={<Home />} />  
+        </Routes>
+      </ProtectedRoute>
     </>
   );
 }

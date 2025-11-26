@@ -1,16 +1,16 @@
 import React, { createContext, useState, useEffect } from 'react';
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken") || "");
+    const [token, setAccessToken] = useState(localStorage.getItem("Authorization") || "");
     useEffect(() => {
-        if(accessToken) {
-            localStorage.setItem("accessToken", accessToken);
+        if(token) {
+            localStorage.setItem("Authorization", token);
         }else{
-            localStorage.removeItem("accessToken");
+            localStorage.removeItem("Authorization");
         }
-    }, [accessToken]);
+    }, [token]);
     return (
-        <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+        <AuthContext.Provider value={{ token, setAccessToken }}>
             {children}
         </AuthContext.Provider>
     );
