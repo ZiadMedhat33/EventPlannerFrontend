@@ -10,15 +10,14 @@ export async function Search (keywords, role) {
     }
     try {
         const token = localStorage.getItem("Authorization");
-        const url = "http://localhost:3000/api/events/search";
-        const res = await fetch(url, {
-            method: "POST",
+        const res = await fetch("http://localhost:3000/api/events/search", {
+            method: "GET",
             headers: { "Authorization": `Bearer ${token}` }
         });
         const data = await res.json();
         if (!res.ok) throw new Error(`Searching for events failed, Error code: ${res.status}`);
         console.log("Search successful")
-        return data;
+        return data.data;
     } catch (error) {
         console.log(error)
         throw new Error(error);

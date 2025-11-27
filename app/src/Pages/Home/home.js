@@ -1,17 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { Search } from '../../Services/events';
 import Card from '../../Components/Card/card';
 export default function Home() {
-    const events = Search();
-    let eventsCards = [];
-    eventsCards = events.forEach(element => {
-        return Card({id:element.id,title:element.title, date:element.event_date, time:element.event_time, location:element.location,description:element.description});
-    });
+    const [events, setEvents] = useState([]);
+    useEffect(() => {
+        async function loadEvents() {
+            const data = await Search("","");
+            console.log(data);
+            setEvents(data);
+        }
+        loadEvents();
+    }, []);
     return (
         <>
-            <div className={'cards-grid'}>
-                {eventsCards==[]?(<h1>No events</h1>):(
-                    eventsCards
+            <h1><center>Events</center></h1>
+            <div className="cards-grid">
+                {events.length === 0 ? (
+                    <h1>No events</h1>
+                ) : (
+                    events.map(event => (
+                        <Card 
+                            key={event.id}
+                            id={event.id}
+                            title={event.title}
+                            date={event.event_date}
+                            time={event.event_time}
+                            location={event.location}
+                            description={event.description}
+                            role={event.role}
+                        />
+                    ))
                 )}
             </div>
         </>

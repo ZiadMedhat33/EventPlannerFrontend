@@ -1,14 +1,17 @@
-import {useEffect, useNavigate} from "react";
-function ProtectedRoute({ children }) {
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+
+export default function ProtectedRoute({ children }) {
     const navigate = useNavigate();
-    const isLoggedIn = !!localStorage.getItem("token");
-
+    const { token, loading } = useContext(AuthContext);
+    const isLoggedIn = !!token;
     useEffect(() => {
-        if (!isLoggedIn) navigate("/login");
-    }, [isLoggedIn]);
-
+        if (!loading && !isLoggedIn) {
+            navigate("/login");
+        }
+    }, [loading, isLoggedIn, navigate]);
+    if (loading) return null;
     if (!isLoggedIn) return null;
-
     return children;
 }
-export default ProtectedRoute;

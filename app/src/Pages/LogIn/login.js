@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './style.css'
 import { login } from "../../Services/auth";
 import { AuthContext } from "../../Context/AuthContext";
@@ -9,8 +9,8 @@ export default function Login() {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
-    const {setAccessToken} = useContext(AuthContext)
-    const handleLogin = async (e) => {
+    const {token, setAccessToken} = useContext(AuthContext);
+    const handleLogin = async (e) => { 
         e.preventDefault();
         try {
             setAccessToken(await login(email,password));

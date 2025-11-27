@@ -3,9 +3,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [token, setAccessToken] = useState(localStorage.getItem("Authorization") || "");
     useEffect(() => {
-        if(token) {
-            localStorage.setItem("Authorization", token);
-        }else{
+        if(!token) {
             localStorage.removeItem("Authorization");
         }
     }, [token]);

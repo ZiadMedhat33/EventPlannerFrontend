@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './card-style.css';
-export default function Card({id,title, date, time, location,description}) {
+export default function Card({id,title, date, time, location,description,role}) {
     return (
         <>
         <div className={"card"} style={{width: "18rem"}}>
@@ -12,6 +12,7 @@ export default function Card({id,title, date, time, location,description}) {
                         <h6 className={"card-time"}>{time}</h6>
                     </div>
                     <h6 className={"card-location"}>{location}</h6>
+                    <h6 className={"card-location"}>{role}</h6>
                     <p className={"card-description"}>{description}</p>
                 </div>
             </Link>
