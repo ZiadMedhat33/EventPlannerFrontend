@@ -1,9 +1,9 @@
-export async function login (email, password) {
+export async function login(email, password) {
     try {
         const res = await fetch("http://localhost:3000/api/users/login", {
             method: "POST",
             body: JSON.stringify({ email, password }),
-            headers:{"Content-Type":"application/json"}
+            headers: { "Content-Type": "application/json" }
         });
         const data = await res.json();
         if (!res.ok) {

@@ -5,6 +5,7 @@ import Nav from "./Components/Header/Nav";
 import Home from "./Pages/Home/home";
 import ProtectedRoute from "./Context/ProtectedRoute";
 import Event from "./Pages/Event/Event";
+import EventCreation from "./Pages/EventCreation/EventCreation";
 function App() {
   return (
     <>
@@ -13,19 +14,20 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={
-              <ProtectedRoute>
-                  <Home />
-              </ProtectedRoute>
-          }
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
         />
-        <Route 
-          path="/event/:id/:title/:date/:time/:location/:role/:description" 
+        <Route
+          path="/event/:id/:title/:date/:time/:location/:role/:description"
           element={
             <ProtectedRoute>
               <Event />
             </ProtectedRoute>
-          } 
+          }
         />
+        <Route path="eventcreation" element={<EventCreation />} />
       </Routes>
     </>
   );

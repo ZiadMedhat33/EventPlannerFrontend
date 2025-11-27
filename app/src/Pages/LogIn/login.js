@@ -9,11 +9,11 @@ export default function Login() {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
-    const {token, setAccessToken} = useContext(AuthContext);
-    const handleLogin = async (e) => { 
+    const { token, setAccessToken } = useContext(AuthContext);
+    const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            setAccessToken(await login(email,password));
+            setAccessToken(await login(email, password));
             navigate("/");
         } catch (error) {
             setMessage(error.message || "Login failed. Please try again.");

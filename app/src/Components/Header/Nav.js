@@ -7,17 +7,17 @@ import "./Nav.css";
 
 export default function Nav() {
     const [username, setUsername] = React.useState("");
-    const { accessToken,setAccessToken } = React.useContext(AuthContext);
+    const { accessToken, setAccessToken } = React.useContext(AuthContext);
     const handleLogout = async () => {
-        try{
+        try {
             setUsername("");
-            logout();  
+            logout();
             setAccessToken("");
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
     };
-     React.useEffect(() => {
+    React.useEffect(() => {
         if (accessToken) {
             try {
                 const decoded = jwtDecode(accessToken);
@@ -105,6 +105,6 @@ export default function Nav() {
 
                 <li onClick={openSideBar} className="burger"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#000000"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg></a></li>
             </ul>
-      </nav>
-)
+        </nav>
+    )
 }
