@@ -78,7 +78,7 @@ export default function Nav() {
 
             </ul>
             <ul className="mainBar">
-                <li id="title"><a href="#">EventPlanner</a></li>
+                <li id="title"><Link to="/">EventPlanner</Link></li>
                 {!username ? (
                     <>
                         <li className="hideOnMobile"><Link to="/login">Login</Link></li>

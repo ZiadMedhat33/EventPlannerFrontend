@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Search } from '../../Services/events';
-import Card from '../../Components/Card/card';
-export default function Home() {
-    const [events, setEvents] = useState([]);
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import List from "../../Components/EventMembersList/List";
+export default function Event() {
+    const {
+        id,
+        title,
+        date,
+        time,
+        location,
+        role,
+        description
+    } = useParams();
     useEffect(() => {
-        async function loadAttendees() {
-            
-        }
-        loadEvents();
+        
     }, []);
     return (
         <>
@@ -19,6 +24,8 @@ export default function Home() {
             <h6 className={"card-location"}>{location}</h6>
             <h6 className={"card-location"}>{role}</h6>
             <p className={"card-description"}>{description}</p>
+            <h1>Attendees List</h1>
+            <List event_id={id}/>
         </>
     );
 }

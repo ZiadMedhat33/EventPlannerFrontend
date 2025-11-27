@@ -4,7 +4,7 @@ export default function Card({id,title, date, time, location,description,role}) 
     return (
         <>
         <div className={"card"} style={{width: "18rem"}}>
-            <Link to={`/details?id=${id}`} className={"card-link"}>
+            <Link to={role=="organizer"?(`/event/${id}/${title}/${date}/${time}/${location}/${role}/${description}`):("/")} className={"card-link"}>
                 <div className={"card-body"}>
                     <h5 className={"card-title"}>{title}</h5>
                     <div className={"card-date-time-wrapper"}>

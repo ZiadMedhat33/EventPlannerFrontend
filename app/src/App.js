@@ -1,11 +1,10 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/LogIn/login";
 import Signup from "./Pages/SignUp/signup";
 import Nav from "./Components/Header/Nav";
 import Home from "./Pages/Home/home";
 import ProtectedRoute from "./Context/ProtectedRoute";
-
-
+import Event from "./Pages/Event/Event";
 function App() {
   return (
     <>
@@ -19,11 +18,13 @@ function App() {
               </ProtectedRoute>
           }
         />
-        <Route path="/details" element={
-              <ProtectedRoute>
-                  < />
-              </ProtectedRoute>
-          }
+        <Route 
+          path="/event/:id/:title/:date/:time/:location/:role/:description" 
+          element={
+            <ProtectedRoute>
+              <Event />
+            </ProtectedRoute>
+          } 
         />
       </Routes>
     </>
