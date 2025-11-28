@@ -27,7 +27,11 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="eventcreation" element={<EventCreation />} />
+        <Route path="/eventcreation" element={
+          <ProtectedRoute>
+            <EventCreation />
+          </ProtectedRoute>
+          } />
       </Routes>
     </>
   );

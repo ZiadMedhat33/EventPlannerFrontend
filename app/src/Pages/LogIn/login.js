@@ -9,7 +9,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
-    const { token, setAccessToken } = useContext(AuthContext);
+    const { setAccessToken } = useContext(AuthContext);
     const handleLogin = async (e) => {
         e.preventDefault();
         try {

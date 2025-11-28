@@ -6,9 +6,12 @@
     transition: 0.2s ease;
     text-decoration: none;
 }
+.card-status{
+    display: flex;
+}
 .card:hover {
     transform: translateY(-4px);
-    border-color: blue 2px solid;
+    border-color: blue 2px solid !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 .card-link {

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import List from "../../Components/EventMembersList/List";
+import EventDetails from "../../Components/EventDetails/EventDetails";
 export default function Event() {
     const {
         id,
@@ -16,14 +17,17 @@ export default function Event() {
     }, []);
     return (
         <>
-            <h1 className={"title"}>{title}</h1>
-            <div className={"date-time-wrapper"}>
-                <h2 className={"date"}>{date}</h2>
-                <h2 className={"time"}>{time}</h2>
-            </div>
-            <h6 className={"card-location"}>{location}</h6>
-            <h6 className={"card-location"}>{role}</h6>
-            <p className={"card-description"}>{description}</p>
+            <EventDetails
+                givenId={id}
+                givenTitle={title}
+                givenDate={date}
+                givenTime={time}
+                givenLocation={location}
+                givenRole={role}
+                givenDescription={description}
+                onSubmit={(updated) => console.log("Updated event:", updated)}
+            />
+
             <h1>Attendees List</h1>
             <List event_id={id}/>
         </>
