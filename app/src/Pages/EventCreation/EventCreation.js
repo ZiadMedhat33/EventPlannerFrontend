@@ -79,7 +79,7 @@ export default function EventCreation() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-            <button type="submit" className="submit" />
+            <button type="submit" className="submit">Create The Event</button>
             {success && <p className="success">{message}</p>}
             {err && <p className="err">{message}</p>}
         </form>
