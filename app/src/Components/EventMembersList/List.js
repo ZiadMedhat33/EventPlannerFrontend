@@ -9,12 +9,12 @@ export default function List({ event_id }) {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
     function makeRows(data) {
-        return data.map((attendee) => (
-            <tr key={attendee.id}>
-                <td>{attendee.email}</td>
-                <td>{attendee.role}</td>
-                <td>{attendee.status}</td>
-                <td>{attendee.invited_at}</td>
+        return data.map((attendee, index) => (
+            <tr key={index}>
+                <td>{index}</td>
+                <td>{(attendee.first_name== null)?(`User${index}`):(attendee.first_name)}</td>
+                <td>{(attendee.last_name== null)?(`Pater${index}`):(attendee.last_name)}</td>
+                <td>{(attendee.status == null)?("Not Going"):(attendee.status)}</td>
             </tr>
         ));
     }
@@ -30,9 +30,10 @@ export default function List({ event_id }) {
             navigate("/");
         }
     }
-    const handleInvite = async () => {
+    const handleInvite = async (e) => {
+        e.preventDefault();
         try {
-            await inviteAttendee(event_id,email);
+            await inviteAttendee(event_id, email);
             loadAttendees();
         } catch (error) {
             console.log(error);
@@ -47,17 +48,16 @@ export default function List({ event_id }) {
                 <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
                 <button type="submit">Invite A New Attendee</button>
             </form>
-            {rows.length === 0 ? (
+            {(!Array.isArray(rows) || rows.length === 0) ? (
                 <h3>No Attendees</h3>
             ) : (
                 <table className="event-members-table">
                     <thead>
                         <tr>
-                            <th>Email</th>
-                            <th>Role</th>
+                            <th>Index</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Status</th>
-                            <th>Invited At</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>

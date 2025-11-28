@@ -3,7 +3,7 @@ import './card-style.css';
 import { useRef, useEffect, useState } from 'react';
 import { updateStatus } from '../../Services/events';
 export default function Card({id,title, date, time, location,description,role, status}) {
-    const [selectedStatus, setSelectedStatus] = useState(status==="null"?("Pending"):(status));
+    const [selectedStatus, setSelectedStatus] = useState(status==="null"?("Not Going"):(status));
     const firstRender = useRef(true);
 
 useEffect(() => {

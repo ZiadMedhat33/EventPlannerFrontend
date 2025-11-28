@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -13,10 +14,10 @@ export default function Signup() {
     setMessage("");
     setMessageType("");
     try {
-      const res = await fetch("http://localhost:4000/auth/register", {
+      const res = await fetch("http://localhost:3000/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ lastName:lastName,firstName:firstName, email:email, password:password }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -26,9 +27,7 @@ export default function Signup() {
       }
       setMessage('Signup successful!');
       setMessageType("success");
-      setUsername("");
-      setEmail("");
-      setPassword("");
+      navigate("/login");
     } catch (err) {
       setMessage(`Signup failed. Please try again: ${err}`);
       setMessageType("error");
@@ -51,8 +50,10 @@ export default function Signup() {
             <label className="text-light-gray" >Email</label>
             <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-            <label className="text-light-gray" >Username</label>
-            <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <label className="text-light-gray" >First Name</label>
+            <input placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+            <label className="text-light-gray" >Last Name</label>
+            <input placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
 
             <label className="text-light-gray" >Password</label>
             <input type="password"

@@ -25,9 +25,9 @@ export default function Home() {
     return (
         <>
             <EventFilter onFilterChange={handleFilterChange} />
-            <h1><center>Organized Events</center></h1>
+            <h1><center>Events</center></h1>
             <div className="cards-grid">
-                {events.length === 0 ? (
+                {!Array.isArray(events) || events.length === 0 ? (
                     <h1>No events</h1>
                 ) : (
                     events.map(event => (

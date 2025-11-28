@@ -2,10 +2,21 @@ export async function SearchAndFilter (keywords, minDate, maxDate, role) {
     try {
         const token = localStorage.getItem("Authorization");
         let url = "http://localhost:3000/api/events/search?";
-        if(keywords !== "")url+=`keywords=${keywords}`;
-        if(minDate !== "")url+=`startDate=${minDate}`;
-        if(maxDate !== "")url+=`endDate=${maxDate}`;
-        if(role !== "")url+=`role=${role}`;
+        if(keywords !== ""){
+            url+=`keywords=${keywords}`;
+        }
+        if(minDate !== ""){
+            if(!url.endsWith('?'))url+="&";
+            url+=`startDate=${minDate}`;
+        }
+        if(maxDate !== ""){
+            if(!url.endsWith('?'))url+="&";
+            url+=`endDate=${maxDate}`;
+        }
+        if(role !== ""){
+            if(!url.endsWith('?'))url+="&";
+            url+=`role=${role}`;
+        }
         const res = await fetch(url, {
             method: "GET",
             headers: { "Authorization": `Bearer ${token}` }
@@ -15,8 +26,7 @@ export async function SearchAndFilter (keywords, minDate, maxDate, role) {
         console.log("Search successful")
         return data.data;
     } catch (error) {
-        console.log(error)
-        throw new Error(error);
+        console.log(error);
     }
 }
 export async function getAttendees(event_id){
@@ -59,19 +69,34 @@ export async function updateStatus(id, selectedStatus){
 }
 
 
-export async function inviteAttendee(id,Email){
+export async function inviteAttendee(event_id,email){
     try {
         const token = localStorage.getItem("Authorization");
-        const res = await fetch(`http://localhost:3000/api/events/${id}/invite`, {
+        const res = await fetch(`http://localhost:3000/api/events/${event_id}/invite`, {
             method: "POST",
-            headers: { "Authorization": `Bearer ${token}`},
+            headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json"},
             body: JSON.stringify({
-                email: Email
+                email: email
             })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(`Invite attendee to event failed, Error code: ${res.status}, ${res.message}`);
         console.log("Invite attendee to event was successful")
+        return data.status;
+    } catch (error) {
+        console.log(error)
+    }
+}
+export async function deleteEvent(id){
+    try {
+        const token = localStorage.getItem("Authorization");
+        const res = await fetch(`http://localhost:3000/api/events/${id}`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}`},
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(`Delete event failed, Error code: ${res.status}, ${res.message}`);
+        console.log("Delete event was successful")
         return data.status;
     } catch (error) {
         console.log(error)
