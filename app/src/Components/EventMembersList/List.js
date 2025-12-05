@@ -1,4 +1,4 @@
-import './list-style.css';
+import './List-style.css';
 import { useEffect, useState } from "react";
 import { getAttendees, inviteAttendee } from '../../Services/events';
 import { useNavigate } from 'react-router-dom';
