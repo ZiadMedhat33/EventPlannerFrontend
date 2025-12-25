@@ -1,7 +1,7 @@
 export async function SearchAndFilter (keywords, minDate, maxDate, role) {
     try {
         const token = localStorage.getItem("Authorization");
-        let url = "http://localhost:3000/api/events/search?";
+        let url = `${process.env.REACT_APP_API_URL}/api/events/search?`;
         if(keywords !== ""){
             url+=`keywords=${keywords}`;
         }
@@ -32,7 +32,7 @@ export async function SearchAndFilter (keywords, minDate, maxDate, role) {
 export async function getAttendees(event_id){
     try {
         const token = localStorage.getItem("Authorization");
-        const res = await fetch(`http://localhost:3000/api/events/${event_id}/attendees`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/events/${event_id}/attendees`, {
             method: "GET",
             headers: { "Authorization": `Bearer ${token}` }
         });
@@ -49,7 +49,7 @@ export async function updateStatus(id, selectedStatus){
     try {
         console.log(id +" "+ selectedStatus);
         const token = localStorage.getItem("Authorization");
-        const res = await fetch(`http://localhost:3000/api/events/${id}/attendance`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/events/${id}/attendance`, {
             method: "PUT",
             headers: { 
                 "Authorization": `Bearer ${token}`,
@@ -72,7 +72,7 @@ export async function updateStatus(id, selectedStatus){
 export async function inviteAttendee(event_id,email){
     try {
         const token = localStorage.getItem("Authorization");
-        const res = await fetch(`http://localhost:3000/api/events/${event_id}/invite`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/events/${event_id}/invite`, {
             method: "POST",
             headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json"},
             body: JSON.stringify({
@@ -90,7 +90,7 @@ export async function inviteAttendee(event_id,email){
 export async function deleteEvent(id){
     try {
         const token = localStorage.getItem("Authorization");
-        const res = await fetch(`http://localhost:3000/api/events/${id}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/events/${id}`, {
             method: "DELETE",
             headers: { "Authorization": `Bearer ${token}`},
         });
