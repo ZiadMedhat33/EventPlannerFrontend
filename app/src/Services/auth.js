@@ -1,6 +1,6 @@
 export async function login(email, password) {
     try {
-        const res = await fetch("http://localhost:3000/api/users/login", {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/users/login`, {
             method: "POST",
             body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" }
